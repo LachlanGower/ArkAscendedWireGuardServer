@@ -1,0 +1,1 @@
+start C:\ShooterGame\Binaries\Win64\ArkAscendedServer.exe TheIsland_WP?SessionName=<server_name>?Port=7777?MultiHome=10.69.69.2?RCONEnabled=True?RCONPort=27020 -WinLiveMaxPlayers=5 -ForceAllowCaveFlyers -MULTIHOME -NoBattlEye -clusterid=<cluster_id>
