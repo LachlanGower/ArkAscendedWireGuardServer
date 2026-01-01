@@ -57,3 +57,52 @@ Set-NetFirewallRule -DisplayName "ARK Query UDP" `
 
 Ark requires some very specific settings (MultiHome and RCON) ive pasted all my batch files which use this simple RCON client https://github.com/malkamius/ASA_RCon
 
+You also need SteamCMD
+
+
+
+To test connections
+
+This will tell you what is listening on what port. When the ark server is up you need to see the UDP ports and the TCP ports
+```
+netstat -ano
+```
+
+send a message from the client (the machine you play the game one)
+```
+echo "test" | ncat -u -w1 <public_ip> 7777
+```
+
+If there is a failure on Ubuntu run (this can help narrow down if there are even packets reachig the server
+```
+tcpdump -ni any udp port 7777
+
+OR
+
+tcpdump -i wg0 udp port 7777
+```
+Run this at the same time on the windows server and send the client message and you should recieve it.
+```
+ncat -ul 7777
+```
+
+Unsure if this was necessary
+
+Run on windows server
+```
+Set-NetIPInterface -InterfaceAlias "WireGuard*" -InterfaceMetric 5
+```
+
+IMPORTANT
+ARK caches server data
+open the console with grave (~)
+```
+open <public_ip>:7777?<password>
+```
+If above fails, try joining a server and then quitting to main menu and trying again. (I would at the very least confirm the traffic between wireguard is forwarded properly)
+
+Some VPS have custom firewalls you have to configure
+
+
+I used AI for a lot of this, Happy to take suggestions to harden the config.
+
